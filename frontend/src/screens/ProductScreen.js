@@ -7,34 +7,34 @@ import { listProductDetails } from '../actions/productActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ match, history }) => {
+  const [qty, setQty] = useState(0);
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  const [count, setCount] = useState(0);
-
   const qtyCountClick = (e) => {
     // console.log(e.target.id);
     if (e.target.id === 'qty-plus') {
-      setCount(count + 1);
+      setQty(qty + 1);
     } else {
-      setCount(count - 1);
+      setQty(qty - 1);
     }
   };
 
   const validate = () => {
-    return parseInt(count);
+    return parseInt(qty);
   };
 
-  const handleChangeCount = (count) => {
-    setCount(validate(count));
+  const handleChangeCount = (qty) => {
+    setQty(validate(qty));
   };
 
   const addToCartHandler = (e) => {
     e.preventDefault();
     console.log('Add to Cart Clicked');
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const ProductScreen = ({ match }) => {
                         variant='outline-primary'
                         className='qty-minus'
                         id='qty-minus'
-                        disabled={count === 0}
+                        disabled={qty === 0}
                       >
                         <i
                           className='fa fa-minus'
@@ -94,14 +94,14 @@ const ProductScreen = ({ match }) => {
                         min='0'
                         max={product.countInStock}
                         onChange={handleChangeCount}
-                        value={validate(count)}
+                        value={validate(qty)}
                       />
                       <Button
                         onClick={qtyCountClick}
                         className='qty-plus'
                         id='qty-plus'
                         variant='outline-primary'
-                        disabled={count === product.countInStock}
+                        disabled={qty === product.countInStock}
                       >
                         <i
                           className='fa fa-plus'
@@ -121,9 +121,10 @@ const ProductScreen = ({ match }) => {
                       size='sm'
                       className='py-3'
                       onClick={addToCartHandler}
+                      disabled={qty === 0}
                     >
                       <i
-                        class='fa fa-shopping-cart mr-2'
+                        className='fa fa-shopping-cart mr-2'
                         aria-hidden='true'
                       ></i>
                       Add to Cart

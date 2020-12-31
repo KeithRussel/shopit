@@ -1,10 +1,23 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { logout } from '../actions/userActions';
+import SearchBox from './SearchBox';
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
   return (
-    <>
+    <header>
       <div className='top-nav'>
         <div className='top-nav-wrapper'>
           <Navbar>
@@ -15,8 +28,27 @@ const Header = () => {
                 <Nav.Link href='#download'>Download</Nav.Link>
               </Nav>
               <Nav className='ml-auto'>
-                <Nav.Link href='#login'>Login</Nav.Link>
-                <Nav.Link href='#signup'>Sign Up</Nav.Link>
+                {userInfo ? (
+                  <NavDropdown title={userInfo.name} id='username'>
+                    <LinkContainer to='/profile'>
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <>
+                    <LinkContainer to='/login'>
+                      <Nav.Link href='/login'>
+                        <i className='fas fa-user'></i> Login
+                      </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to='/register'>
+                      <Nav.Link href='/register'> Register</Nav.Link>
+                    </LinkContainer>
+                  </>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -25,12 +57,7 @@ const Header = () => {
           <LinkContainer to='/'>
             <Navbar.Brand>Shop it</Navbar.Brand>
           </LinkContainer>
-          <Form inline>
-            <FormControl type='text' placeholder='Search' />
-            <Button>
-              <i className='fa fa-search' aria-hidden='true'></i>
-            </Button>
-          </Form>
+          <Route render={({ history }) => <SearchBox history={history} />} />
           <div className='d-block order-cart'>
             <Nav.Link href='#cart' className='cart'>
               <i className='fa fa-shopping-cart' aria-hidden='true'></i>
@@ -38,7 +65,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </>
+    </header>
   );
 };
 
