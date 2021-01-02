@@ -59,9 +59,11 @@ const Header = () => {
           </LinkContainer>
           <Route render={({ history }) => <SearchBox history={history} />} />
           <div className='d-block order-cart'>
-            <Nav.Link href='#cart' className='cart'>
-              <i className='fa fa-shopping-cart' aria-hidden='true'></i>
-            </Nav.Link>
+            <LinkContainer to='/cart'>
+              <Nav.Link href='/cart' className='cart'>
+                <i className='fa fa-shopping-cart' aria-hidden='true'></i>
+              </Nav.Link>
+            </LinkContainer>
           </div>
         </div>
       </div>
