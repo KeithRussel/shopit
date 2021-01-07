@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
+import { ORDER_DETAILS_RESET } from '../constants/orderConstants';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -40,6 +41,9 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
+    // dispatch({
+    //   type: ORDER_DETAILS_RESET,
+    // });
   }, [dispatch, history, userInfo, user]);
 
   const submitHandler = (e) => {
@@ -109,6 +113,54 @@ const ProfileScreen = ({ location, history }) => {
       </Col>
       <Col md={9}>
         <h2>My Orders</h2>
+        {loadingOrders ? (
+          <Loader />
+        ) : errorOrders ? (
+          <Message variant='danger'>{errorOrders}</Message>
+        ) : (
+          <Table striped bordered hover variant='dark'>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Order Date</th>
+                <th>Paid</th>
+                <th>Delivered</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.createdAt}</td>
+                  <td>
+                    {order.isPaid ? (
+                      <i class='fa fa-check' aria-hidden='true'></i>
+                    ) : (
+                      <i class='fa fa-times' aria-hidden='true'></i>
+                    )}
+                  </td>
+                  <td>
+                    {!order.isDelivered ? (
+                      <span>Not yet delivered</span>
+                    ) : (
+                      <span>Delivered</span>
+                    )}
+                  </td>
+                  <td>{order.totalPrice}</td>
+                  <td>
+                    <LinkContainer to={`/order/${order._id}`}>
+                      <Button className='btn-sm' variant='light'>
+                        View
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Col>
     </Row>
   );
