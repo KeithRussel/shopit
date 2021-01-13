@@ -56,7 +56,7 @@ export const listProductDetails = (id) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      PRODUCT_DELETE_REQUEST,
+      type: PRODUCT_DELETE_REQUEST,
     });
 
     const {
