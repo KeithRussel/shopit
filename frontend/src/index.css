@@ -22,6 +22,11 @@ a {
   text-decoration: none;
 }
 
+/* PAGINATION */
+ul.pagination {
+  justify-content: center;
+}
+
 /* HEADER */
 
 .top-nav p,

@@ -21,7 +21,7 @@ const SearchBox = ({ history }) => {
         name='q'
         onChange={(e) => setKeyword(e.target.value)}
       />
-      <Button>
+      <Button type='submit'>
         <i className='fa fa-search' aria-hidden='true'></i>
       </Button>
     </Form>
