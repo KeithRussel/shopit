@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -12,9 +12,25 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  const removeBadge = () => {
+    // const element = document.getElementsByClassName('fa-shopping-cart');
+    // element.classList.remove('badge-cart');
+    console.log('test');
+  };
+
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      removeBadge();
+      // console.log('test');
+    }
+  });
 
   return (
     <header>
@@ -74,7 +90,14 @@ const Header = () => {
           <div className='d-block order-cart'>
             <LinkContainer to='/cart'>
               <Nav.Link href='/cart' className='cart'>
-                <i className='fa fa-shopping-cart' aria-hidden='true'></i>
+                <i
+                  data-count={
+                    cartItems.length > 0 ? cartItems.length : undefined
+                  }
+                  className='fa fa-shopping-cart badge-cart'
+                  aria-hidden='true'
+                ></i>
+                {/* <span>2</span> */}
               </Nav.Link>
             </LinkContainer>
           </div>
