@@ -49,6 +49,10 @@ ul.pagination {
   box-shadow: 5px 6px #3462b23d;
 }
 
+.form-margin-auto {
+  margin: 12rem auto;
+}
+
 /* HEADER */
 
 .top-nav p,
