@@ -191,7 +191,7 @@ const ProductScreen = ({ match, history }) => {
             </Row>
           </div>
           <div className='product-review-wrapper my-3'>
-            <h3>Reviews</h3>
+            <h3>Product Ratings</h3>
             <Row>
               <Col md={12}>
                 {product.reviews.map((review) => (

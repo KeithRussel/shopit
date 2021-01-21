@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -7,6 +7,7 @@ import { logout } from '../actions/userActions';
 import SearchBox from './SearchBox';
 
 const Header = () => {
+  const [toggleClass, setToggleClass] = useState(false);
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -19,18 +20,13 @@ const Header = () => {
     dispatch(logout());
   };
 
-  const removeBadge = () => {
-    // const element = document.getElementsByClassName('fa-shopping-cart');
-    // element.classList.remove('badge-cart');
-    console.log('test');
-  };
-
   useEffect(() => {
     if (cartItems.length === 0) {
-      removeBadge();
-      // console.log('test');
+      setToggleClass(false);
+    } else {
+      setToggleClass(true);
     }
-  });
+  }, [cartItems, setToggleClass]);
 
   return (
     <header>
@@ -94,7 +90,9 @@ const Header = () => {
                   data-count={
                     cartItems.length > 0 ? cartItems.length : undefined
                   }
-                  className='fa fa-shopping-cart badge-cart'
+                  className={`fa fa-shopping-cart ${
+                    toggleClass ? 'badge-cart' : ''
+                  }`}
                   aria-hidden='true'
                 ></i>
                 {/* <span>2</span> */}
