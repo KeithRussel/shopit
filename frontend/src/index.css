@@ -96,6 +96,20 @@ ul.pagination {
   font-weight: bold;
 }
 
+/* HOMESCREEN */
+.hero,
+.top-products {
+  background-color: #fff;
+  padding: 1rem;
+}
+
+.top-products .react-multi-carousel-track .react-multi-carousel-item {
+  padding: 1rem;
+  border: 1px solid #e6e6e6;
+  margin: 2px;
+  width: 346px;
+}
+
 /* FOOTER */
 footer {
   text-align: center;

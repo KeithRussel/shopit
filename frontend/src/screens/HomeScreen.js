@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
 // import products from '../products';
 import { listProducts } from '../actions/productActions';
+import ProductCarousel from '../components/ProductCarousel';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -23,26 +24,31 @@ const HomeScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
   return (
     <>
-      <h1>Products</h1>
-
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Row>
-            {products.map((p) => (
-              <Col sm={12} ml={6} lg={3} key={p._id}>
-                <Product product={p} />
-              </Col>
-            ))}
-          </Row>
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ''}
-          />
+          <div className='top-products mb-2'>
+            <h1>Top Products</h1>
+            <ProductCarousel />
+          </div>
+          <div className='hero'>
+            <h1>Products</h1>
+            <Row>
+              {products.map((p) => (
+                <Col sm={12} ml={6} lg={3} key={p._id}>
+                  <Product product={p} />
+                </Col>
+              ))}
+            </Row>
+            <Paginate
+              pages={pages}
+              page={page}
+              keyword={keyword ? keyword : ''}
+            />
+          </div>
         </>
       )}
     </>
