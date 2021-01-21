@@ -1,6 +1,6 @@
 /* GLOBAL */
 :root {
-  --primary-color: #3397ff;
+  --primary-color: #4582ec;
   --link-color: #489efc;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -22,9 +22,31 @@ a {
   text-decoration: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.card-title {
+  color: #343a40;
+}
+
+.main-wrapper {
+  margin-top: 5.7rem;
+}
+
 /* PAGINATION */
 ul.pagination {
   justify-content: center;
+}
+
+/* FORM */
+.form-bg {
+  background-color: #3b70cb29;
+  padding: 1rem;
+  border: 2px solid #3462b217;
+  box-shadow: 5px 6px #3462b23d;
 }
 
 /* HEADER */
@@ -36,7 +58,11 @@ ul.pagination {
 }
 
 .top-nav {
-  background: linear-gradient(-180deg, #2d99f5, #3397ff);
+  background: linear-gradient(-180deg, #3360ae, #4582ec);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
 }
 
 .top-nav-wrapper {
@@ -63,6 +89,7 @@ ul.pagination {
 
 .top-nav .top-nav-wrapper-search form > input {
   width: 92%;
+  border: none;
 }
 
 .top-nav .top-nav-wrapper-search form > input:focus {
@@ -71,6 +98,7 @@ ul.pagination {
 
 .top-nav .top-nav-wrapper-search form > button {
   background-color: var(--primary-color);
+  border-radius: 0;
 }
 
 .top-nav-wrapper-search .order-cart {
@@ -96,11 +124,30 @@ ul.pagination {
   font-weight: bold;
 }
 
+.top-nav .show {
+  background-color: var(--primary-color);
+}
+
+.top-nav .top-nav-wrapper .show > a,
+.top-nav .top-nav-wrapper .show > .nav-link,
+.top-nav .top-nav-wrapper a.nav-link:hover {
+  color: var(--light-color);
+}
+
+.top-nav .top-nav-wrapper a.nav-link:hover,
+.top-nav .top-nav-wrapper a.dropdown-item:hover {
+  background-color: #3563b4;
+}
+
 /* HOMESCREEN */
 .hero,
 .top-products {
   background-color: #fff;
   padding: 1rem;
+}
+
+.hero .card-body a > .card-title {
+  font-size: 1rem;
 }
 
 .top-products .react-multi-carousel-track .react-multi-carousel-item {
@@ -110,10 +157,14 @@ ul.pagination {
   width: 346px;
 }
 
+.top-products .react-multi-carousel-track .react-multi-carousel-item h5 > span {
+  color: var(--primary-color);
+}
+
 /* FOOTER */
 footer {
   text-align: center;
-  background-color: var(--primary-color);
+  background: linear-gradient(-90deg, #3360ae, #4582ec);
   color: var(--light-color);
 }
 
@@ -143,4 +194,9 @@ footer {
 button.qty-plus,
 button.qty-minus {
   padding: 8px 15px;
+}
+
+.input-qty button,
+.input-qty input {
+  border-radius: 0;
 }

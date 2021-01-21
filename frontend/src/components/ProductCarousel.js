@@ -64,7 +64,7 @@ const ProductCarousel = () => {
           <Image src={product.image} alt={product.name} fluid />
           <div>
             <h5>
-              {product.name} (${product.price})
+              {product.name} <span>(${product.price})</span>
             </h5>
           </div>
         </Link>
