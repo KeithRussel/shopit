@@ -15,6 +15,7 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from '../constants/orderConstants';
+import { updateProduct } from '../actions/productActions';
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants';
 
 const OrderScreen = ({ match, history }) => {
@@ -36,6 +37,8 @@ const OrderScreen = ({ match, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const [countInStock, setCountInStock] = useState(0);
+
   if (!loading) {
     // Calculate prices
     const addDecimals = (num) => {
@@ -46,6 +49,12 @@ const OrderScreen = ({ match, history }) => {
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
   }
+
+  // const remainingStocks = () => {
+  //   {order.orderItems.map((item, index) => (
+  //     item.qty -
+  //   ))}
+  // }
 
   useEffect(() => {
     if (!userInfo) {
@@ -76,6 +85,7 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
+
     // eslint-disable-next-line
   }, [dispatch, orderId, successPay, successDeliver, order]);
 
