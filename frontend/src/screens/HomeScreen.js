@@ -47,6 +47,9 @@ const HomeScreen = ({ match }) => {
           <div className='hero'>
             <h1>Products</h1>
             <Row>
+              {products.length === 0 && (
+                <p className='mx-3'>No {keyword} found.</p>
+              )}
               {products.map((p) => (
                 <Col sm={12} ml={6} lg={3} key={p._id}>
                   <Product product={p} />
