@@ -13,6 +13,8 @@ node_modules/
 /frontend/build
 frontend/node_modules/
 
+uploads/
+
 # misc
 .DS_Store
 .env
