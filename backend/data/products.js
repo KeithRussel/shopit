@@ -8,7 +8,7 @@ const products = [
     price: 89.99,
     countInStock: 10,
     rating: 4.5,
-    numReviews: 12,
+    numReviews: 0,
   },
   {
     name: 'Chessboard',
@@ -19,7 +19,7 @@ const products = [
     price: 50,
     countInStock: 7,
     rating: 4.0,
-    numReviews: 8,
+    numReviews: 0,
   },
   {
     name: 'Steph Curry Jersey',
@@ -30,7 +30,7 @@ const products = [
     price: 20.99,
     countInStock: 5,
     rating: 3,
-    numReviews: 12,
+    numReviews: 0,
   },
   {
     name: 'High Tech Drone',
@@ -41,7 +41,7 @@ const products = [
     price: 250.99,
     countInStock: 11,
     rating: 5,
-    numReviews: 12,
+    numReviews: 0,
   },
   {
     name: 'Samsung Galaxy A5',
@@ -63,7 +63,7 @@ const products = [
     price: 400.99,
     countInStock: 0,
     rating: 4,
-    numReviews: 12,
+    numReviews: 0,
   },
   {
     name: 'Razer Headset',
@@ -74,7 +74,7 @@ const products = [
     price: 49.99,
     countInStock: 12,
     rating: 3.5,
-    numReviews: 10,
+    numReviews: 0,
   },
   {
     name: 'Razer Mouse',
@@ -85,7 +85,7 @@ const products = [
     price: 70,
     countInStock: 9,
     rating: 3.5,
-    numReviews: 10,
+    numReviews: 0,
   },
 ];
 
