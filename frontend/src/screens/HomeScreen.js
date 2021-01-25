@@ -27,23 +27,23 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <Meta />
-      {!keyword ? (
-        <ProductCarousel />
-      ) : (
-        <Link to='/' className='btn-primary'>
-          Go Back
-        </Link>
-      )}
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <div className='top-products mb-2'>
-            <h1>Top Products</h1>
-            <ProductCarousel />
-          </div>
+          {!keyword ? (
+            <div className='top-products mb-2'>
+              <h1>Top Products</h1>
+
+              <ProductCarousel />
+            </div>
+          ) : (
+            <Link className='btn btn-primary my-3' to='/'>
+              Go Back
+            </Link>
+          )}
           <div className='hero'>
             <h1>Products</h1>
             <Row>
