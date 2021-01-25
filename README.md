@@ -1,6 +1,6 @@
 # Shopit
 
-Shotit is a custom ecommerce site built in using Reactjs, Nodejs, & Express.
+Shopit is a custom ecommerce site built in using Reactjs, Nodejs, & Express.
 Check the [sample link](https://shopitapp.herokuapp.com/)
 
 ![](shopti.gif)
