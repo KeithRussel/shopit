@@ -13,7 +13,7 @@ node_modules/
 /frontend/build
 frontend/node_modules/
 
-uploads/
+uploads
 
 # misc
 .DS_Store
