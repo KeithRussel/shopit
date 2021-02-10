@@ -7,7 +7,9 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listProductDetails, updateProduct } from '../actions/productActions';
+import { listCategory } from '../actions/categoryActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
+import OptionCategory from '../components/OptionCategory';
 
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id;
@@ -40,6 +42,7 @@ const ProductEditScreen = ({ match, history }) => {
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId));
+        dispatch(listCategory());
       } else {
         setName(product.name);
         setPrice(product.price);
@@ -94,7 +97,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/productlist' className='btn bt-light my-3'>
+      <Link to='/admin/productlist' className='btn btn-primary my-3'>
         Go Back
       </Link>
       <FormContainer>
@@ -164,14 +167,28 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.Control>
             </Form.Group>
 
+            {/* <Form.Group controlId='category'>
+              <Form.Label>Category</Form.Label>
+              <Form.Control as='select'></Form.Control>
+              <option value='' disabled>
+                Choose Launderer
+              </option>
+              <OptionCategory category={category} />
+            </Form.Group> */}
+
             <Form.Group controlId='category'>
               <Form.Label>Category</Form.Label>
               <Form.Control
-                type='text'
-                placeholder='Enter category'
+                as='select'
+                name='category'
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-              ></Form.Control>
+              >
+                <option value='' disabled>
+                  Choose Category
+                </option>
+                <OptionCategory category={category} />
+              </Form.Control>
             </Form.Group>
 
             <Form.Group controlId='description'>

@@ -15,6 +15,7 @@ import {
   listProductDetails,
   createProductReview,
 } from '../actions/productActions';
+import { addToCart } from '../actions/cartActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Meta from '../components/Meta';
@@ -57,9 +58,8 @@ const ProductScreen = ({ match, history }) => {
   };
 
   const addToCartHandler = (e) => {
-    e.preventDefault();
-    console.log('Add to Cart Clicked');
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    dispatch(addToCart(product._id, qty));
+    history.push('/cart');
   };
 
   const submitHandler = (e) => {
