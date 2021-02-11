@@ -10,4 +10,17 @@ const getCategories = asyncHandler(async (req, res) => {
   // console.log(res.json(categories));
 });
 
-export { getCategories };
+// @desc    Create a category
+// @route   POST /api/categories
+// @access  Private/Admin
+const createCategory = asyncHandler(async (req, res) => {
+  const category = new Category({
+    name: 'Sample name',
+    user: req.user._id,
+  });
+
+  const createdCategory = await category.save();
+  res.status(201).json(createdCategory);
+});
+
+export { getCategories, createCategory };
