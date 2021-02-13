@@ -10,7 +10,9 @@ import {
   deleteProduct,
   createProduct,
 } from '../actions/productActions';
+import { listCategory, createCategory } from '../actions/categoryActions';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
+import { CATEGORY_CREATE_RESET } from '../constants/categoryConstants';
 
 const ProductListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -35,6 +37,14 @@ const ProductListScreen = ({ history, match }) => {
     product: createdProduct,
   } = productCreate;
 
+  const categoryCreate = useSelector((state) => state.categoryCreate);
+  const {
+    loading: loadingCategoryCreate,
+    error: errorCategoryCreate,
+    success: successCategoryCreate,
+    category: createdCategory,
+  } = categoryCreate;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -46,6 +56,7 @@ const ProductListScreen = ({ history, match }) => {
     // }
 
     dispatch({ type: PRODUCT_CREATE_RESET });
+    dispatch({ type: CATEGORY_CREATE_RESET });
 
     if (!userInfo.isAdmin) {
       history.push('/login');
@@ -56,6 +67,12 @@ const ProductListScreen = ({ history, match }) => {
     } else {
       dispatch(listProducts('', pageNumber));
     }
+
+    if (successCategoryCreate) {
+      history.push(`/admin/category/${createdCategory._id}/edit`);
+    } else {
+      dispatch(listCategory);
+    }
   }, [
     dispatch,
     history,
@@ -64,6 +81,8 @@ const ProductListScreen = ({ history, match }) => {
     successCreate,
     createdProduct,
     pageNumber,
+    successCategoryCreate,
+    createdCategory,
   ]);
 
   const deleteProductHandler = (id) => {
@@ -78,6 +97,11 @@ const ProductListScreen = ({ history, match }) => {
     dispatch(createProduct());
   };
 
+  const addCategory = () => {
+    console.log('Add Category');
+    dispatch(createCategory());
+  };
+
   return (
     <>
       <Row>
@@ -85,6 +109,11 @@ const ProductListScreen = ({ history, match }) => {
           <h1>Products</h1>
         </Col>
         <Col className='text-right'>
+          <Button className='my-3' onClick={addCategory}>
+            <i className='fas fa-plus'></i> Add Category
+          </Button>
+        </Col>
+        <Col className='text-right' md='auto'>
           <Button className='my-3' onClick={createProductHandler}>
             <i className='fas fa-plus'></i> Create Product
           </Button>
