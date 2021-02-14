@@ -170,6 +170,9 @@ footer {
   text-align: center;
   background: linear-gradient(-90deg, #3360ae, #4582ec);
   color: var(--light-color);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 /* PRODUCT DETAILS SCREEN */

@@ -2,6 +2,9 @@ import {
   CATEGORY_REQUEST,
   CATEGORY_SUCCESS,
   CATEGORY_FAIL,
+  CATEGORY_SINGLE_REQUEST,
+  CATEGORY_SINGLE_SUCCESS,
+  CATEGORY_SINGLE_FAIL,
   CATEGORY_CREATE_REQUEST,
   CATEGORY_CREATE_SUCCESS,
   CATEGORY_CREATE_FAIL,
@@ -22,6 +25,19 @@ export const categoryListReducer = (state = { categories: [] }, action) => {
         categories: action.payload,
       };
     case CATEGORY_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const categorySingleReducer = (state = { category: {} }, action) => {
+  switch (action.type) {
+    case CATEGORY_SINGLE_REQUEST:
+      return { loading: true, ...state };
+    case CATEGORY_SINGLE_SUCCESS:
+      return { loading: false, category: action.payload };
+    case CATEGORY_SINGLE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

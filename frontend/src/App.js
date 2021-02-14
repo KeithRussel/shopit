@@ -18,6 +18,8 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import EditProductScreen from './screens/EditProductScreen';
+import EditCategoryScreen from './screens/EditCategoryScreen';
+import CategoryListScreen from './screens/CategoryListScreen';
 import { Container } from 'react-bootstrap';
 
 const App = () => {
@@ -48,6 +50,20 @@ const App = () => {
             exact
           />
           <Route path='/admin/product/:id/edit' component={EditProductScreen} />
+          <Route
+            path='/admin/categorylist'
+            component={CategoryListScreen}
+            exact
+          />
+          <Route
+            path='/admin/productlist/:pageNumber'
+            component={ProductListScreen}
+            exact
+          />
+          <Route
+            path='/admin/category/:id/edit'
+            component={EditCategoryScreen}
+          />
           <Route path='/admin/orderlist' component={OrderListScreen} />
           <Route path='/search/:keyword' component={HomeScreen} exact />
           <Route path='/page/:pageNumber' component={HomeScreen} exact />
